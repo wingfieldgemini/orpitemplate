@@ -477,6 +477,29 @@ document.querySelectorAll('.prop-card__fav').forEach(btn => {
 });
 
 /* ================================================================
+   LISTING TABS — À Vendre / À Louer toggle on nos-biens page
+   ================================================================ */
+document.querySelectorAll('.listing-tabs [data-listing]').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const target = tab.dataset.listing;
+    // Update tab states
+    document.querySelectorAll('.listing-tabs [data-listing]').forEach(t => {
+      t.classList.remove('active');
+      t.setAttribute('aria-selected', 'false');
+    });
+    tab.classList.add('active');
+    tab.setAttribute('aria-selected', 'true');
+    // Toggle grids
+    const venteGrid = document.getElementById('listings-vente');
+    const locationGrid = document.getElementById('listings-location');
+    if (venteGrid && locationGrid) {
+      venteGrid.style.display = target === 'vente' ? '' : 'none';
+      locationGrid.style.display = target === 'location' ? '' : 'none';
+    }
+  });
+});
+
+/* ================================================================
    PROPERTY DETAIL MODAL
    ================================================================ */
 (function() {
