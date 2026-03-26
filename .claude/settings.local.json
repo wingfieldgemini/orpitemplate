@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:claude.ai)",
+      "Bash(open:*)",
+      "WebFetch(domain:www.orpi.com)",
+      "Bash(git init:*)",
+      "Bash(git branch:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git remote:*)",
+      "Bash(git push:*)",
+      "Bash(gh api:*)",
+      "Bash(git checkout:*)",
+      "Bash(zip:*)",
+      "Bash(ls:*)"
+    ]
+  }
+}

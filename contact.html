@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Le Carré d'Azur | Groupe Orpi</title>
+  <meta name="description" content="Contactez Le Carré d'Azur, groupe Orpi. Notre équipe est disponible pour répondre à toutes vos questions immobilières sur la Côte d'Azur." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .contact-form-card { background: var(--color-white); border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); padding: 32px 24px; }
+    @media (min-width: 768px) { .contact-form-card { padding: 40px; } }
+    .contact-form-card h2 { margin-bottom: 24px; }
+  </style>
+</head>
+<body>
+
+  <!-- Skip link -->
+  <a href="#main" class="skip-link">Aller au contenu principal</a>
+
+  <!-- ============================================================
+       HEADER
+       ============================================================ -->
+  <header class="header" id="header">
+    <!-- Top bar -->
+    <div class="header__top">
+      <div class="container header__top-inner">
+        <div class="header__top-left">
+          <span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            3 agences entre Cannes &amp; Nice
+          </span>
+          <span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Lun–Ven 9h–18h
+          </span>
+        </div>
+        <div class="header__top-right">
+          <a href="tel:+33663277484" aria-label="Appeler le 06 63 27 74 84">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            06 63 27 74 84
+          </a>
+          <a href="https://www.orpi.com" target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            orpi.com
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main header -->
+    <div class="container header__main">
+      <a href="index.html" class="header__brand" aria-label="Le Carré d'Azur – Accueil">
+        <span class="header__logo">
+          <img src="orpi_logo_gris_rvb.jpg" alt="Logo Orpi" width="85" height="45" />
+        </span>
+        <span>
+          <span class="header__agency">Le Carré d'Azur</span>
+          <span class="header__agency-sub">GROUPE ORPI</span>
+        </span>
+      </a>
+
+      <nav class="header__nav" aria-label="Navigation principale">
+        <a href="index.html">Accueil</a>
+        <a href="acheter.html">Acheter</a>
+        <a href="louer.html">Louer</a>
+        <a href="vendre.html">Vendre</a>
+        <a href="gestion-locative.html">Gestion locative</a>
+        <a href="estimer.html">Estimer</a>
+        <a href="contact.html" aria-current="page">Contact</a>
+      </nav>
+
+      <div class="header__actions">
+        <a href="tel:+33663277484" class="header__phone" aria-label="Appeler le 06 63 27 74 84">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          06 63 27 74 84
+        </a>
+        <a href="estimer.html" class="btn btn--primary btn--sm">Estimer mon bien</a>
+      </div>
+
+      <button class="hamburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-nav">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobile-nav" aria-label="Menu mobile">
+    <nav class="mobile-menu__links">
+      <a href="index.html">Accueil</a>
+      <a href="acheter.html">Acheter</a>
+      <a href="louer.html">Louer</a>
+      <a href="vendre.html">Vendre</a>
+      <a href="gestion-locative.html">Gestion locative</a>
+      <a href="estimer.html">Estimer</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+      <div class="mobile-menu__divider"></div>
+      <a href="https://www.orpi.com" target="_blank" rel="noopener noreferrer">orpi.com</a>
+    </nav>
+    <div class="mobile-menu__cta">
+      <a href="tel:+33663277484" class="btn btn--outline">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="18" height="18"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        06 63 27 74 84
+      </a>
+      <a href="estimer.html" class="btn btn--primary">Estimer mon bien</a>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MAIN
+       ============================================================ -->
+  <main id="main">
+
+    <!-- ============================================================
+         HERO
+         ============================================================ -->
+    <section class="page-hero page-hero--img">
+      <div class="page-hero__bg" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&h=900&fit=crop');" aria-hidden="true"></div>
+      <div class="container" style="position:relative;">
+        <div class="page-hero__content">
+          <div class="page-hero__badge">
+            <span class="page-hero__dot" aria-hidden="true"></span>
+            À votre écoute
+          </div>
+          <h1>Contactez <span>Le Carré d'Azur</span></h1>
+          <p class="page-hero__desc">Notre équipe est disponible pour répondre à toutes vos questions et vous accompagner dans votre projet immobilier.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CONTACT INFO CARDS
+         ============================================================ -->
+    <section class="section" aria-labelledby="contact-info-title">
+      <div class="container">
+        <h2 class="sr-only" id="contact-info-title">Nos coordonnées</h2>
+        <div class="contact-cards">
+          <div class="card">
+            <div class="card__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <h3>Téléphone</h3>
+            <p><a href="tel:+33663277484">06 63 27 74 84</a></p>
+          </div>
+          <div class="card">
+            <div class="card__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <h3>Email</h3>
+            <p><a href="mailto:contact@lecarredazur.fr">contact@lecarredazur.fr</a></p>
+          </div>
+          <div class="card">
+            <div class="card__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <h3>Adresse</h3>
+            <p>Villeneuve-Loubet, Côte d'Azur</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CONTACT FORM + IMAGE
+         ============================================================ -->
+    <section class="section" aria-labelledby="form-title">
+      <div class="container">
+        <div class="content-grid">
+          <div class="contact-form-card">
+            <h2 id="form-title">Envoyez-nous un message</h2>
+            <form action="#" method="post">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="prenom">Prénom</label>
+                  <input type="text" id="prenom" name="prenom" class="form-input" required />
+                </div>
+                <div class="form-group">
+                  <label for="nom">Nom</label>
+                  <input type="text" id="nom" name="nom" class="form-input" required />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" class="form-input" required />
+                </div>
+                <div class="form-group">
+                  <label for="telephone">Téléphone</label>
+                  <input type="tel" id="telephone" name="telephone" class="form-input" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="objet">Objet</label>
+                <select id="objet" name="objet" class="form-select">
+                  <option value="" disabled selected>Sélectionnez un objet</option>
+                  <option value="achat">Achat</option>
+                  <option value="vente">Vente</option>
+                  <option value="location">Location</option>
+                  <option value="gestion-locative">Gestion locative</option>
+                  <option value="estimation">Estimation</option>
+                  <option value="autre">Autre</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="message">Votre message</label>
+                <textarea id="message" name="message" class="form-textarea" rows="5" required></textarea>
+              </div>
+              <button type="submit" class="btn btn--primary btn--lg btn--full">Envoyer le message</button>
+            </form>
+          </div>
+          <div class="content-img">
+            <img src="https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?w=800&h=600&fit=crop" alt="Agence Le Carré d'Azur" width="800" height="600" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         NOS 3 AGENCES
+         ============================================================ -->
+    <section class="section section--grey" aria-labelledby="agences-title">
+      <div class="container">
+        <div class="section__header">
+          <h2 id="agences-title">Nos 3 agences</h2>
+        </div>
+        <div class="contact-cards">
+          <div class="card">
+            <div class="card__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <h4>Agence Villeneuve-Loubet</h4>
+            <p>Votre agence principale entre Cannes et Nice</p>
+          </div>
+          <div class="card">
+            <div class="card__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <h4>Agence Cagnes-sur-Mer</h4>
+            <p>Au c&#339;ur de la ville, à deux pas de la mer</p>
+          </div>
+          <div class="card">
+            <div class="card__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <h4>Agence Saint-Paul-de-Vence</h4>
+            <p>Dans l'un des plus beaux villages de la Côte d'Azur</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CTA BANNER
+         ============================================================ -->
+    <section class="section" aria-labelledby="cta-title">
+      <div class="container">
+        <div class="cta-banner">
+          <div class="cta-banner__decor" aria-hidden="true"></div>
+          <div class="cta-banner__content">
+            <div class="cta-banner__tag">VOTRE PROJET</div>
+            <h2 class="cta-banner__title" id="cta-title">Vous avez un projet <em>immobilier</em> ?</h2>
+          </div>
+          <div class="cta-banner__btns">
+            <a href="estimer.html" class="btn btn--white">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              Estimer mon bien
+            </a>
+            <a href="acheter.html" class="btn btn--ghost">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              Voir nos biens
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <div class="footer__brand-name">Le Carré d'Azur</div>
+          <div class="footer__brand-sub">GROUPE ORPI</div>
+          <p class="footer__brand-desc">Trois agences immobilières entre Cannes et Nice. Achat, vente, location et gestion locative sur la Côte d'Azur depuis plus de 30 ans.</p>
+          <div class="footer__socials">
+            <a href="#" class="footer__social" aria-label="Facebook">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="#" class="footer__social" aria-label="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="#" class="footer__social" aria-label="LinkedIn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer__cols">
+          <div class="footer__col">
+            <h4>ACHETER &amp; LOUER</h4>
+            <a href="acheter.html">Acheter un bien</a>
+            <a href="louer.html">Louer un bien</a>
+            <a href="estimer.html">Estimer mon bien</a>
+          </div>
+          <div class="footer__col">
+            <h4>NOS SERVICES</h4>
+            <a href="vendre.html">Vendre mon bien</a>
+            <a href="gestion-locative.html">Gestion locative</a>
+            <a href="estimer.html">Estimation gratuite</a>
+          </div>
+          <div class="footer__col">
+            <h4>CONTACT</h4>
+            <a href="contact.html">Nous contacter</a>
+            <a href="tel:+33663277484">06 63 27 74 84</a>
+            <a href="https://www.orpi.com" target="_blank" rel="noopener noreferrer">orpi.com</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <span>&copy; 2026 Le Carré d'Azur — Groupe Orpi. Tous droits réservés.</span>
+        <div class="footer__legal">
+          <a href="#">Mentions légales</a>
+          <a href="#">Politique de confidentialité</a>
+          <a href="#">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
