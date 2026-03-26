@@ -27,57 +27,178 @@ if (header) {
 }
 
 /* ================================================================
-   SEARCH TABS — switch between Acheter / Louer / Estimer
+   SEARCH BAR — tabs, state, filtering, URL construction
    ================================================================ */
-document.querySelectorAll('.search-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.search-tab').forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    const target = tab.dataset.tab;
-    // Redirect to the right page on tab click
-    if (target === 'louer') window.location.href = 'louer.html';
-    else if (target === 'estimer') window.location.href = 'estimer.html';
-    else if (target === 'acheter') window.location.href = 'acheter.html';
-  });
-});
+(function() {
+  const tabs = document.querySelectorAll('.search-tab');
+  const form = document.querySelector('.search-form');
+  if (!tabs.length || !form) return;
 
-/* ================================================================
-   SEARCH FILTER — filter property cards on acheter/louer pages
-   ================================================================ */
-const searchForm = document.querySelector('.search-form');
-if (searchForm) {
-  searchForm.addEventListener('submit', (e) => {
+  // Determine current page context
+  const page = window.location.pathname.split('/').pop() || 'index.html';
+  const tabTargets = {
+    acheter: 'acheter.html',
+    louer: 'louer.html',
+    estimer: 'estimer.html'
+  };
+
+  // Track active mode
+  let activeMode = 'acheter';
+  tabs.forEach(tab => { if (tab.classList.contains('active')) activeMode = tab.dataset.tab; });
+
+  // --- 1. Tab switching ---
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab;
+      // Update visual state
+      tabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      activeMode = target;
+
+      // Update form action to match selected tab
+      if (target === 'estimer') {
+        form.action = 'estimer.html';
+      } else if (target === 'louer') {
+        form.action = 'louer.html';
+      } else {
+        form.action = 'acheter.html';
+      }
+
+      console.log('[Search] Tab switched to:', activeMode);
+    });
+  });
+
+  // --- 2. Read URL params on page load and pre-fill selects ---
+  const params = new URLSearchParams(window.location.search);
+  if (params.toString()) {
+    // Set mode from URL
+    const urlMode = params.get('mode');
+    if (urlMode) {
+      activeMode = urlMode;
+      tabs.forEach(t => {
+        const isActive = t.dataset.tab === urlMode;
+        t.classList.toggle('active', isActive);
+        t.setAttribute('aria-selected', isActive.toString());
+      });
+    }
+
+    // Pre-fill selects from URL params
+    form.querySelectorAll('select[name]').forEach(select => {
+      const val = params.get(select.name);
+      if (val) {
+        const option = select.querySelector(`option[value="${val}"]`);
+        if (option) select.value = val;
+      }
+    });
+
+    // Auto-filter cards on the listing pages
+    filterCards();
+  }
+
+  // --- 3. Log state changes on any dropdown change ---
+  form.querySelectorAll('select[name]').forEach(select => {
+    select.addEventListener('change', () => {
+      console.log(`[Search] ${select.name} changed to:`, select.value || '(all)');
+    });
+  });
+
+  // --- 4. Search submission ---
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const type = searchForm.querySelector('[id^="s-type"]');
-    const location = searchForm.querySelector('[id^="s-location"]');
+
+    // Gather all values
+    const searchState = { mode: activeMode };
+    form.querySelectorAll('select[name]').forEach(select => {
+      if (select.value) searchState[select.name] = select.value;
+    });
+
+    // Build query string
+    const queryParams = new URLSearchParams(searchState);
+    const targetPage = tabTargets[activeMode] || 'acheter.html';
+    const searchUrl = targetPage + '?' + queryParams.toString();
+
+    console.log('[Search] Query:', searchState);
+    console.log('[Search] URL:', searchUrl);
+
+    // If we're already on the target page, filter in-place
+    const onTargetPage = page === targetPage
+      || (activeMode === 'acheter' && page === 'index.html');
+
+    if (onTargetPage) {
+      // Update URL without reload
+      history.replaceState(null, '', '?' + queryParams.toString());
+      filterCards();
+    } else {
+      // Navigate to the target page with params
+      window.location.href = searchUrl;
+    }
+  });
+
+  // --- Filter cards in-place on listing pages ---
+  function filterCards() {
     const cards = document.querySelectorAll('.prop-card, .featured-card');
+    if (!cards.length) return;
+
+    const typeVal = (form.querySelector('[name="type"]')?.value || '').toLowerCase();
+    const locVal = (form.querySelector('[name="localisation"]')?.value || '').toLowerCase().replace(/-/g, ' ');
+    const roomsVal = form.querySelector('[name="pieces"]')?.value || '';
+    const budgetVal = parseInt(form.querySelector('[name="budget"]')?.value) || 0;
+
     let visibleCount = 0;
 
     cards.forEach(card => {
-      const cardText = card.textContent.toLowerCase();
-      const typeVal = type ? type.value.toLowerCase() : '';
-      const locVal = location ? location.value.toLowerCase() : '';
-
+      const text = card.textContent.toLowerCase();
       let show = true;
-      if (typeVal && typeVal !== 'tous les biens' && typeVal !== 'tous') {
-        if (!cardText.includes(typeVal)) show = false;
+
+      // Type filter
+      if (typeVal) {
+        if (!text.includes(typeVal)) show = false;
       }
-      if (locVal && locVal !== 'toute la côte d\'azur' && locVal !== 'toute') {
-        if (!cardText.includes(locVal.split(',')[0].trim().toLowerCase())) show = false;
+
+      // Location filter
+      if (locVal) {
+        if (!text.includes(locVal.split(' ')[0])) show = false;
+      }
+
+      // Rooms filter — look for "X pièces" in card text
+      if (roomsVal) {
+        const roomsNum = parseInt(roomsVal);
+        const roomMatch = text.match(/(\d+)\s*pièce/);
+        if (roomMatch) {
+          const cardRooms = parseInt(roomMatch[1]);
+          if (roomsVal === '5') {
+            if (cardRooms < 5) show = false;
+          } else {
+            if (cardRooms !== roomsNum) show = false;
+          }
+        }
+      }
+
+      // Budget filter — extract price from card
+      if (budgetVal) {
+        const priceMatch = text.match(/([\d\s]+)\s*€/);
+        if (priceMatch) {
+          const cardPrice = parseInt(priceMatch[1].replace(/\s/g, ''));
+          if (cardPrice > budgetVal) show = false;
+        }
       }
 
       card.style.display = show ? '' : 'none';
       if (show) visibleCount++;
     });
 
-    // Show "no results" message
+    // No results message
     let noResults = document.getElementById('no-results');
     if (visibleCount === 0) {
       if (!noResults) {
         noResults = document.createElement('p');
         noResults.id = 'no-results';
-        noResults.style.cssText = 'text-align:center;padding:40px 0;color:#9E958F;font-size:16px;grid-column:1/-1;';
-        noResults.textContent = 'Aucun bien ne correspond à votre recherche. Essayez d\'élargir vos critères.';
+        noResults.style.cssText = 'text-align:center;padding:48px 0;color:#9E958F;font-size:16px;grid-column:1/-1;';
+        noResults.textContent = 'Aucun bien ne correspond à votre recherche. Essayez d\u2019élargir vos critères.';
         const grid = document.querySelector('.properties__grid') || document.querySelector('.featured-grid');
         if (grid) grid.parentNode.insertBefore(noResults, grid.nextSibling);
       }
@@ -85,8 +206,10 @@ if (searchForm) {
     } else if (noResults) {
       noResults.style.display = 'none';
     }
-  });
-}
+
+    console.log(`[Search] Filtered: ${visibleCount}/${cards.length} visible`);
+  }
+})();
 
 /* ================================================================
    FORM HANDLING — contact & estimation forms
