@@ -180,21 +180,27 @@ ul, ol { list-style: none; }
 @media (min-width: 1024px) { .header__main { height: 76px; gap: 20px; } }
 
 .header__brand {
-  display: flex; align-items: center; gap: 12px;
+  display: flex; align-items: center; gap: 14px;
   text-decoration: none; flex-shrink: 0;
 }
 .header__logo { display: flex; align-items: center; flex-shrink: 0; }
-.header__logo svg { height: 36px; width: auto; display: block; flex-shrink: 0; }
-@media (min-width: 1024px) { .header__logo svg { height: 40px; } }
+.header__logo svg { height: 32px; width: auto; display: block; flex-shrink: 0; }
+@media (min-width: 1024px) { .header__logo svg { height: 36px; } }
+.header__brand-divider {
+  width: 1px; height: 28px;
+  background: var(--color-light-brown);
+  flex-shrink: 0;
+}
+@media (min-width: 1024px) { .header__brand-divider { height: 32px; } }
 .footer__logo img {
   height: 35px; width: auto;
   filter: brightness(0) invert(1);
 }
 .header__agency {
-  font-size: 18px; font-weight: 500; color: var(--color-dark-grey);
+  font-size: 16px; font-weight: 500; color: var(--color-dark-grey);
   white-space: nowrap; line-height: 1.2;
 }
-@media (min-width: 1024px) { .header__agency { font-size: 20px; } }
+@media (min-width: 1024px) { .header__agency { font-size: 18px; } }
 .header__agency-sub {
   font-size: 10px; font-weight: 500; color: var(--color-brown);
   letter-spacing: 0.5px; margin-top: 1px;
