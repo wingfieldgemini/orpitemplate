@@ -794,13 +794,14 @@ ul, ol { list-style: none; }
 }
 @media (min-width: 1024px) { .footer { padding: 72px 0 0; } }
 .footer__watermark {
-  position: absolute; right: -40px; bottom: -20px;
-  width: 280px; height: auto; opacity: 0.04;
+  position: absolute; right: -20px; bottom: -30px;
+  width: 240px; height: auto;
   pointer-events: none; user-select: none;
-  filter: brightness(0) invert(1);
+  opacity: 0.06;
+  mix-blend-mode: screen;
 }
-@media (min-width: 768px) { .footer__watermark { width: 360px; right: -20px; } }
-@media (min-width: 1024px) { .footer__watermark { width: 440px; right: 0; } }
+@media (min-width: 768px) { .footer__watermark { width: 300px; right: 20px; } }
+@media (min-width: 1024px) { .footer__watermark { width: 340px; right: 40px; bottom: -20px; } }
 
 .footer__top {
   display: grid; grid-template-columns: 1fr; gap: 40px; padding-bottom: 40px;
