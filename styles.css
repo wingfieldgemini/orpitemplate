@@ -790,8 +790,17 @@ ul, ol { list-style: none; }
    ================================================================ */
 .footer {
   background: #2c2a35; color: rgba(255,255,255,0.6); padding: 48px 0 0;
+  position: relative; overflow: hidden;
 }
 @media (min-width: 1024px) { .footer { padding: 72px 0 0; } }
+.footer__watermark {
+  position: absolute; right: -40px; bottom: -20px;
+  width: 280px; height: auto; opacity: 0.04;
+  pointer-events: none; user-select: none;
+  filter: brightness(0) invert(1);
+}
+@media (min-width: 768px) { .footer__watermark { width: 360px; right: -20px; } }
+@media (min-width: 1024px) { .footer__watermark { width: 440px; right: 0; } }
 
 .footer__top {
   display: grid; grid-template-columns: 1fr; gap: 40px; padding-bottom: 40px;
