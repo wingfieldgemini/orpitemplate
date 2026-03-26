@@ -475,3 +475,208 @@ document.querySelectorAll('.prop-card__fav').forEach(btn => {
     }
   });
 });
+
+/* ================================================================
+   PROPERTY DETAIL MODAL
+   ================================================================ */
+(function() {
+  // Create modal overlay once
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-modal', 'true');
+  overlay.setAttribute('aria-label', 'Détails du bien');
+  overlay.innerHTML = `
+    <div class="modal">
+      <div class="modal__gallery">
+        <button class="modal__close" aria-label="Fermer">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <img class="modal__gallery-img" src="" alt="" />
+        <span class="modal__badge"></span>
+        <div class="modal__gallery-nav"></div>
+        <button class="modal__gallery-btn modal__gallery-btn--prev" aria-label="Image précédente">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="modal__gallery-btn modal__gallery-btn--next" aria-label="Image suivante">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+      <div class="modal__body">
+        <div class="modal__price"></div>
+        <div class="modal__price-sub"></div>
+        <div class="modal__title"></div>
+        <div class="modal__location">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span class="modal__location-text"></span>
+        </div>
+        <div class="modal__specs"></div>
+        <div class="modal__section-title">Description</div>
+        <div class="modal__desc"></div>
+        <div class="modal__actions">
+          <a href="contact.html" class="btn btn--primary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Nous contacter
+          </a>
+          <a href="tel:+33663277484" class="btn btn--outline">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            06 63 27 74 84
+          </a>
+        </div>
+        <button class="modal__back" onclick="closePropertyModal()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Retour aux résultats
+        </button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+
+  const modal = overlay.querySelector('.modal');
+  const galleryImg = overlay.querySelector('.modal__gallery-img');
+  const galleryNav = overlay.querySelector('.modal__gallery-nav');
+  const prevBtn = overlay.querySelector('.modal__gallery-btn--prev');
+  const nextBtn = overlay.querySelector('.modal__gallery-btn--next');
+  let galleryImages = [];
+  let galleryIndex = 0;
+
+  // Close handlers
+  function closePropertyModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  window.closePropertyModal = closePropertyModal;
+
+  overlay.querySelector('.modal__close').addEventListener('click', closePropertyModal);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closePropertyModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closePropertyModal();
+  });
+
+  // Gallery navigation
+  function showGalleryImage(index) {
+    galleryIndex = Math.max(0, Math.min(index, galleryImages.length - 1));
+    galleryImg.src = galleryImages[galleryIndex];
+    galleryNav.querySelectorAll('.modal__gallery-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === galleryIndex);
+    });
+  }
+  prevBtn.addEventListener('click', () => showGalleryImage(galleryIndex - 1));
+  nextBtn.addEventListener('click', () => showGalleryImage(galleryIndex + 1));
+
+  // Descriptions keyed by title substring
+  const descriptions = [
+    'Magnifique bien situé dans un cadre exceptionnel sur la Côte d\'Azur. Cette propriété bénéficie d\'une exposition idéale et de prestations haut de gamme, dans un environnement calme et résidentiel.',
+    'Idéalement placé à proximité de toutes les commodités, ce bien offre des volumes généreux et une luminosité remarquable. Les finitions soignées et l\'agencement fonctionnel en font une opportunité rare sur le marché.',
+    'Profitez d\'un cadre de vie privilégié entre mer et montagne. Cette propriété allie charme de l\'ancien et confort moderne, avec des espaces de vie spacieux et une vue dégagée sur les collines environnantes.'
+  ];
+
+  // Open modal from card click
+  function openPropertyModal(card) {
+    // Extract data from card
+    const isFeature = card.classList.contains('featured-card');
+    let price, title, location, badge, imgSrc, specs = [];
+
+    if (isFeature) {
+      price = card.querySelector('.featured-card__price')?.textContent?.trim() || '';
+      title = card.querySelector('.featured-card__title')?.textContent?.trim() || '';
+      badge = card.querySelector('.featured-card__badge')?.textContent?.trim() || 'Vente';
+      imgSrc = card.querySelector('.featured-card__bg img')?.src || '';
+      const metaSpans = card.querySelectorAll('.featured-card__meta span');
+      location = metaSpans[0]?.textContent?.trim() || '';
+      metaSpans.forEach((s, i) => { if (i > 0) specs.push(s.textContent.trim()); });
+    } else {
+      price = card.querySelector('.prop-card__price')?.textContent?.trim() || '';
+      title = card.querySelector('.prop-card__title')?.textContent?.trim() || '';
+      badge = card.querySelector('.prop-card__badge')?.textContent?.trim() || 'Vente';
+      imgSrc = card.querySelector('.prop-card__img img')?.src || '';
+      location = card.querySelector('.prop-card__location')?.textContent?.trim() || '';
+      const specEls = card.querySelectorAll('.prop-card__spec');
+      specEls.forEach(s => specs.push(s.textContent.trim()));
+    }
+
+    const priceSub = card.querySelector('.prop-card__price-m2')?.textContent?.trim() || '';
+
+    // Build gallery (use same image with slight crop variations)
+    const baseUrl = imgSrc.split('?')[0];
+    galleryImages = [
+      baseUrl + '?w=900&h=500&fit=crop',
+      baseUrl + '?w=900&h=500&fit=crop&crop=left',
+      baseUrl + '?w=900&h=500&fit=crop&crop=right'
+    ];
+    galleryIndex = 0;
+
+    // Populate modal
+    overlay.querySelector('.modal__badge').textContent = badge;
+    overlay.querySelector('.modal__price').textContent = price;
+    overlay.querySelector('.modal__price-sub').textContent = priceSub;
+    overlay.querySelector('.modal__title').textContent = title;
+    overlay.querySelector('.modal__location-text').textContent = location;
+
+    // Specs
+    const specsContainer = overlay.querySelector('.modal__specs');
+    specsContainer.innerHTML = '';
+    const specIcons = {
+      'm²': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>',
+      'pièce': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
+      'terrain': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+      'étage': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>'
+    };
+    specs.forEach(spec => {
+      let label = 'Détail';
+      if (spec.includes('m²') && !spec.includes('terrain')) label = 'Surface';
+      else if (spec.includes('pièce')) label = 'Pièces';
+      else if (spec.includes('terrain')) label = 'Terrain';
+      else if (spec.toLowerCase().includes('étage')) label = 'Étage';
+      else label = 'Détail';
+
+      let icon = specIcons['m²'];
+      Object.keys(specIcons).forEach(k => { if (spec.toLowerCase().includes(k)) icon = specIcons[k]; });
+
+      const div = document.createElement('div');
+      div.className = 'modal__spec';
+      div.innerHTML = '<div class="modal__spec-value">' + spec + '</div><div class="modal__spec-label">' + label + '</div>';
+      specsContainer.appendChild(div);
+    });
+
+    // Add price as first spec if few specs
+    if (specs.length < 2) {
+      const priceSpec = document.createElement('div');
+      priceSpec.className = 'modal__spec';
+      priceSpec.innerHTML = '<div class="modal__spec-value">' + price + '</div><div class="modal__spec-label">Prix</div>';
+      specsContainer.prepend(priceSpec);
+    }
+
+    // Description
+    const descIdx = Math.abs(title.length % descriptions.length);
+    overlay.querySelector('.modal__desc').innerHTML = '<p>' + descriptions[descIdx] + '</p><p>N\'hésitez pas à nous contacter pour organiser une visite ou obtenir plus d\'informations sur ce bien. Notre équipe est à votre disposition pour vous accompagner dans votre projet.</p>';
+
+    // Gallery
+    galleryNav.innerHTML = '';
+    galleryImages.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'modal__gallery-dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', () => showGalleryImage(i));
+      galleryNav.appendChild(dot);
+    });
+    showGalleryImage(0);
+
+    // Open
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    overlay.querySelector('.modal__close').focus();
+  }
+
+  // Attach click to all property cards
+  document.querySelectorAll('.prop-card, .featured-card').forEach(card => {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', (e) => {
+      // Don't open modal if clicking fav button
+      if (e.target.closest('.prop-card__fav')) return;
+      e.preventDefault();
+      openPropertyModal(card);
+    });
+  });
+})();
