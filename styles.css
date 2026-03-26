@@ -38,7 +38,10 @@
 /* ================================================================
    BASE — Mobile-first typography (CLAUDE.md table)
    ================================================================ */
-html { scroll-behavior: smooth; }
+/* scroll-behavior on html causes carousel scrollTo to move the whole page.
+   Apply only to anchored navigation instead. */
+html { scroll-behavior: auto; }
+html:focus-within { scroll-behavior: smooth; }
 
 body {
   font-family: var(--font-family);
@@ -315,18 +318,21 @@ ul, ol { list-style: none; }
 @media (min-width: 1024px) { .hero--home { padding: 80px 0 160px; } }
 
 .hero__stats {
-  display: none; position: absolute; right: 48px; bottom: 180px; z-index: 2;
+  display: none; position: absolute; right: 48px;
+  top: 50%; transform: translateY(-50%);
+  z-index: 2;
 }
 @media (min-width: 1200px) { .hero__stats { display: flex; flex-direction: column; gap: 12px; } }
+@media (min-width: 1400px) { .hero__stats { right: 64px; } }
 .hero__stat {
   background: rgba(255,255,255,0.08); backdrop-filter: blur(12px);
   border: 1px solid rgba(255,255,255,0.1);
-  border-radius: var(--radius-md); padding: 16px 24px;
-  text-align: center; min-width: 140px;
+  border-radius: var(--radius-md); padding: 18px 24px;
+  text-align: center; min-width: 150px;
 }
 .hero__stat-number { font-size: 28px; font-weight: 700; color: var(--color-white); line-height: 1; }
 .hero__stat-number .accent { color: var(--color-pink); }
-.hero__stat-label { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.5); margin-top: 4px; }
+.hero__stat-label { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.5); margin-top: 6px; letter-spacing: 0.3px; }
 
 /* Hero with background image */
 .page-hero--img { min-height: 400px; display: flex; align-items: center; }
