@@ -210,23 +210,23 @@ ul, ol { list-style: none; }
 }
 
 .header__nav {
-  display: none; align-items: center; gap: 0; margin-left: auto;
-  flex-shrink: 1; min-width: 0;
+  display: none; align-items: center; justify-content: center;
+  gap: 4px; flex: 1; min-width: 0;
 }
 @media (min-width: 1024px) { .header__nav { display: flex; } }
 .header__nav a {
-  padding: 8px 10px; font-size: 13px; font-weight: 500;
+  padding: 8px 14px; font-size: 14px; font-weight: 500;
   color: var(--color-dark-grey); border-radius: var(--radius-sm);
   transition: all var(--transition); white-space: nowrap;
 }
-@media (min-width: 1200px) { .header__nav a { padding: 8px 12px; } }
+@media (min-width: 1200px) { .header__nav a { padding: 8px 18px; } }
 .header__nav a:hover,
 .header__nav a[aria-current="page"] {
   color: var(--color-red); background: var(--color-red-light);
 }
 
 .header__actions {
-  display: none; align-items: center; gap: 8px; margin-left: 4px; flex-shrink: 0;
+  display: none; align-items: center; gap: 8px; flex-shrink: 0;
   white-space: nowrap;
 }
 @media (min-width: 1024px) { .header__actions { display: flex; } }
