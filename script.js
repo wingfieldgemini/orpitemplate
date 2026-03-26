@@ -46,6 +46,34 @@ if (header) {
   let activeMode = 'acheter';
   tabs.forEach(tab => { if (tab.classList.contains('active')) activeMode = tab.dataset.tab; });
 
+  // Dynamic fields config: which data-field to show per tab
+  const fieldConfig = {
+    acheter: ['budget'],
+    louer:   ['loyer'],
+    estimer: ['surface']
+  };
+  const allDynamicFields = ['budget', 'loyer', 'surface'];
+
+  function showFieldsForMode(mode) {
+    const visible = fieldConfig[mode] || ['budget'];
+    allDynamicFields.forEach(fieldName => {
+      const el = form.querySelector(`[data-field="${fieldName}"]`);
+      if (!el) return;
+      const show = visible.includes(fieldName);
+      el.style.display = show ? '' : 'none';
+      // Disable hidden selects so they don't submit
+      const select = el.querySelector('select');
+      if (select) select.disabled = !show;
+    });
+  }
+
+  function resetSelects() {
+    form.querySelectorAll('select').forEach(s => { s.selectedIndex = 0; });
+  }
+
+  // Set initial field visibility
+  showFieldsForMode(activeMode);
+
   // --- 1. Tab switching ---
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
@@ -60,13 +88,11 @@ if (header) {
       activeMode = target;
 
       // Update form action to match selected tab
-      if (target === 'estimer') {
-        form.action = 'estimer.html';
-      } else if (target === 'louer') {
-        form.action = 'louer.html';
-      } else {
-        form.action = 'acheter.html';
-      }
+      form.action = tabTargets[target] || 'acheter.html';
+
+      // Toggle fields and reset values
+      showFieldsForMode(target);
+      resetSelects();
 
       console.log('[Search] Tab switched to:', activeMode);
     });
