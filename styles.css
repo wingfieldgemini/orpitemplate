@@ -180,12 +180,15 @@ ul, ol { list-style: none; }
   display: flex; align-items: center; gap: 12px;
   text-decoration: none; flex-shrink: 0;
 }
-.header__logo { min-width: 85px; min-height: 45px; display: flex; align-items: center; }
+.header__logo { min-width: 85px; min-height: 45px; display: flex; align-items: center; flex-shrink: 0; }
 .header__logo img {
-  height: 45px; width: auto;
+  height: 45px; width: auto; display: block;
   /* Convert grey logo to brand red #E30513 */
   filter: brightness(0) saturate(100%) invert(13%) sepia(97%) saturate(7404%) hue-rotate(353deg) brightness(90%) contrast(102%);
 }
+/* Fallback: if img fails, show inline SVG logo */
+.header__logo img[data-fallback] { display: none; }
+.header__logo svg { width: 85px; height: 45px; flex-shrink: 0; }
 .footer__logo img {
   height: 35px; width: auto;
   filter: brightness(0) invert(1);
@@ -201,29 +204,24 @@ ul, ol { list-style: none; }
 }
 
 .header__nav {
-  display: none; align-items: center; gap: 2px; margin-left: auto;
+  display: none; align-items: center; gap: 0; margin-left: auto;
+  flex-shrink: 1; min-width: 0;
 }
 @media (min-width: 1024px) { .header__nav { display: flex; } }
 .header__nav a {
-  padding: 8px 12px; font-size: 13px; font-weight: 500;
+  padding: 8px 10px; font-size: 13px; font-weight: 500;
   color: var(--color-dark-grey); border-radius: var(--radius-sm);
   transition: all var(--transition); white-space: nowrap;
 }
+@media (min-width: 1200px) { .header__nav a { padding: 8px 12px; } }
 .header__nav a:hover,
 .header__nav a[aria-current="page"] {
   color: var(--color-red); background: var(--color-red-light);
 }
-.header__nav-divider {
-  width: 1px; height: 20px; background: var(--color-light-brown);
-  margin: 0 4px; flex-shrink: 0;
-}
-.header__nav a.header__nav-external {
-  color: var(--color-brown); font-size: 12px;
-}
-.header__nav a.header__nav-external:hover { color: var(--color-red); }
 
 .header__actions {
-  display: none; align-items: center; gap: 8px; margin-left: 8px; flex-shrink: 0;
+  display: none; align-items: center; gap: 8px; margin-left: 4px; flex-shrink: 0;
+  white-space: nowrap;
 }
 @media (min-width: 1024px) { .header__actions { display: flex; } }
 
