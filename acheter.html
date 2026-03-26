@@ -183,7 +183,7 @@
                 <option value="5">5+ pièces</option>
               </select>
             </div>
-            <div class="search-field">
+            <div class="search-field" data-field="budget">
               <label for="search-budget">BUDGET MAX</label>
               <select id="search-budget" name="budget">
                 <option value="">Sans limite</option>
@@ -192,6 +192,28 @@
                 <option value="600000">600 000 &euro;</option>
                 <option value="800000">800 000 &euro;</option>
                 <option value="1000000">1 000 000 &euro;+</option>
+              </select>
+            </div>
+            <div class="search-field" data-field="loyer" style="display:none;">
+              <label for="search-loyer">LOYER MAX</label>
+              <select id="search-loyer" name="loyer">
+                <option value="">Sans limite</option>
+                <option value="500">500 &euro;/mois</option>
+                <option value="800">800 &euro;/mois</option>
+                <option value="1000">1 000 &euro;/mois</option>
+                <option value="1500">1 500 &euro;/mois</option>
+                <option value="2000">2 000 &euro;/mois+</option>
+              </select>
+            </div>
+            <div class="search-field" data-field="surface" style="display:none;">
+              <label for="search-surface">SURFACE</label>
+              <select id="search-surface" name="surface">
+                <option value="">Indifférent</option>
+                <option value="30">30+ m&sup2;</option>
+                <option value="50">50+ m&sup2;</option>
+                <option value="80">80+ m&sup2;</option>
+                <option value="100">100+ m&sup2;</option>
+                <option value="150">150+ m&sup2;</option>
               </select>
             </div>
             <div class="search-submit">
