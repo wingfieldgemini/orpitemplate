@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Le Groupe — Le Carré d'Azur | Groupe Orpi</title>
+  <meta name="description" content="Découvrez Le Carré d'Azur, groupe Orpi. Trois agences entre Cannes et Nice, dirigées par Marco Semeraro. Plus de 30 ans d'expertise sur la Côte d'Azur." />
+  <meta property="og:title" content="Le Groupe — Le Carré d'Azur | Groupe Orpi" />
+  <meta property="og:description" content="Découvrez Le Carré d'Azur, groupe Orpi. Trois agences entre Cannes et Nice dirigées par Marco Semeraro." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&h=630&fit=crop" />
+  <meta property="og:url" content="https://wingfieldgemini.github.io/orpitemplate/le-groupe.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 40'%3E%3Ctext x='0' y='32' fill='%23E30513' font-family='system-ui,sans-serif' font-weight='700' font-size='38' letter-spacing='-1'%3EOrpi%3C/text%3E%3C/svg%3E" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "Le Carré d'Azur",
+    "description": "Groupe Orpi — Trois agences immobilières entre Cannes et Nice sur la Côte d'Azur.",
+    "url": "https://wingfieldgemini.github.io/orpitemplate/",
+    "telephone": "+33663277484",
+    "email": "contact@lecarredazur.fr",
+    "address": {"@type": "PostalAddress", "addressLocality": "Villeneuve-Loubet", "addressRegion": "Provence-Alpes-Côte d'Azur", "addressCountry": "FR"},
+    "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "127"},
+    "parentOrganization": {"@type": "Organization", "name": "Orpi", "url": "https://www.orpi.com"}
+  }
+  </script>
+  <style>
+    /* Director section */
+    .director { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: center; }
+    @media (min-width: 768px) { .director { grid-template-columns: 320px 1fr; gap: 48px; } }
+    @media (min-width: 1024px) { .director { grid-template-columns: 380px 1fr; gap: 64px; } }
+
+    .director__photo {
+      border-radius: var(--radius-xl); overflow: hidden;
+      aspect-ratio: 1/1; max-width: 380px; margin: 0 auto;
+    }
+    @media (min-width: 768px) { .director__photo { margin: 0; } }
+    .director__photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+
+    .director__name {
+      font-size: 28px; font-weight: 700; color: var(--color-dark-grey);
+      margin-bottom: 4px; letter-spacing: -0.02em;
+    }
+    @media (min-width: 768px) { .director__name { font-size: 32px; } }
+    .director__title {
+      font-size: 14px; font-weight: 500; color: var(--color-red);
+      letter-spacing: 0.5px; margin-bottom: 28px;
+    }
+
+    .director__quote {
+      position: relative; padding: 24px 0 24px 24px;
+      margin-bottom: 28px;
+      border-left: 3px solid var(--color-red);
+    }
+    .director__quote p {
+      font-size: 18px; font-style: italic; color: var(--color-dark-grey);
+      line-height: 1.7; font-weight: 400;
+    }
+    @media (min-width: 768px) { .director__quote p { font-size: 20px; } }
+
+    .director__bio p {
+      font-size: 15px; color: var(--color-brown); line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    @media (min-width: 768px) { .director__bio p { font-size: 16px; } }
+
+    /* Agency cards */
+    .agencies-grid {
+      display: grid; grid-template-columns: 1fr; gap: 20px;
+    }
+    @media (min-width: 600px) { .agencies-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .agency-loc {
+      background: var(--color-white); border-radius: var(--radius-lg);
+      padding: 32px 28px; border: 1px solid rgba(0,0,0,0.04);
+      transition: all var(--transition-slow);
+      display: flex; flex-direction: column;
+    }
+    .agency-loc:hover {
+      transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: transparent;
+    }
+
+    .agency-loc__number {
+      font-size: 48px; font-weight: 800; color: var(--color-light-brown);
+      line-height: 1; margin-bottom: 20px; letter-spacing: -2px;
+    }
+    .agency-loc:hover .agency-loc__number { color: var(--color-red); }
+
+    .agency-loc h3 { font-size: 18px; font-weight: 600; margin-bottom: 6px; color: var(--color-dark-grey); }
+    .agency-loc__service {
+      font-size: 12px; font-weight: 600; color: var(--color-red);
+      letter-spacing: 0.5px; margin-bottom: 20px;
+    }
+
+    .agency-loc__detail {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 14px; color: var(--color-brown); line-height: 1.5;
+      margin-bottom: 12px;
+    }
+    .agency-loc__detail:last-child { margin-bottom: 0; }
+    .agency-loc__detail svg {
+      width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px;
+      color: var(--color-red);
+    }
+
+    /* Award badge inline */
+    .award-inline {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--color-red-light); border-radius: var(--radius-pill);
+      padding: 8px 16px; margin-top: 8px;
+      font-size: 13px; font-weight: 600; color: var(--color-red);
+    }
+    .award-inline svg { width: 18px; height: 18px; }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Aller au contenu principal</a>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="container header__main">
+      <a href="index.html" class="header__brand" aria-label="Le Carré d'Azur – Accueil">
+        <span class="header__logo">
+          <img src="orpilogooo.png" alt="Orpi" height="40" />
+        </span>
+        <span class="header__brand-divider" aria-hidden="true"></span>
+        <span class="header__agency">Le Carré d'Azur</span>
+      </a>
+      <nav class="header__nav" aria-label="Navigation principale">
+        <a href="index.html">Accueil</a>
+        <a href="acheter.html">Nos biens</a>
+        <a href="vendre.html">Vendre</a>
+        <a href="gestion-locative.html">Gestion locative</a>
+      </nav>
+      <div class="header__actions">
+        <a href="contact.html" class="btn btn--primary btn--sm">Contact</a>
+      </div>
+      <button class="hamburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-nav">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobile-nav" aria-label="Menu mobile">
+    <nav class="mobile-menu__links">
+      <a href="index.html">Accueil</a>
+      <a href="acheter.html">Nos biens</a>
+      <a href="vendre.html">Vendre</a>
+      <a href="gestion-locative.html">Gestion locative</a>
+    </nav>
+    <div class="mobile-menu__cta">
+      <a href="contact.html" class="btn btn--primary">Contact</a>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <main id="main">
+
+    <!-- HERO -->
+    <section class="page-hero page-hero--img">
+      <div class="page-hero__bg" style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&h=900&fit=crop');" aria-hidden="true"></div>
+      <div class="container" style="position:relative;z-index:2;">
+        <div class="page-hero__content">
+          <div class="page-hero__badge">
+            <span class="page-hero__dot" aria-hidden="true"></span>
+            Depuis plus de 30 ans
+          </div>
+          <h1>Le <span>Groupe</span></h1>
+          <p class="page-hero__desc">Trois agences, une équipe passionnée et une connaissance approfondie du marché immobilier de la Côte d'Azur.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIRECTION DU GROUPE -->
+    <section class="section" aria-labelledby="direction-title">
+      <div class="container">
+        <div class="section__header">
+          <div class="section__tag">Notre direction</div>
+          <h2 class="section__title" id="direction-title">Direction du <em>groupe</em></h2>
+        </div>
+
+        <div class="director">
+          <div class="director__photo">
+            <img src="marco s.jpeg" alt="Marco Semeraro, Directeur du groupe Le Carré d'Azur" width="380" height="380" loading="lazy" />
+          </div>
+          <div>
+            <div class="director__name">Marco Semeraro</div>
+            <div class="director__title">Directeur — Le Carré d'Azur</div>
+
+            <blockquote class="director__quote">
+              <p>&laquo; Réaliser votre projet immobilier est notre métier. Votre satisfaction est notre priorité depuis plus de 30 ans sur la Côte d'Azur. &raquo;</p>
+            </blockquote>
+
+            <div class="director__bio">
+              <p>Le Carré d'Azur est un groupe d'agences Orpi implanté au c&oelig;ur de la Côte d'Azur, entre Cannes et Nice. Avec trois agences à Villeneuve-Loubet et Cagnes-sur-Mer, notre groupe couvre l'ensemble du marché immobilier local avec expertise et proximité.</p>
+              <p>Lauréat du prix Groupe en Immobilier 2026 au sein du réseau Orpi, nous nous distinguons par la qualité de notre accompagnement et notre connaissance approfondie du marché.</p>
+            </div>
+
+            <div class="award-inline">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+              Prix Groupe en Immobilier 2026
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOS IMPLANTATIONS -->
+    <section class="section section--grey" aria-labelledby="implantations-title">
+      <div class="container">
+        <div class="section__header">
+          <div class="section__tag">Côte d'Azur</div>
+          <h2 class="section__title" id="implantations-title">Nos <em>implantations</em></h2>
+          <p class="section__desc">Trois agences à votre service — Entre Cannes et Nice, nos équipes vous accueillent dans trois agences au c&oelig;ur de la Côte d'Azur.</p>
+        </div>
+
+        <div class="agencies-grid">
+          <!-- Card 1 -->
+          <article class="agency-loc">
+            <div class="agency-loc__number">01</div>
+            <h3>Agence de Villeneuve</h3>
+            <div class="agency-loc__service">Transaction &middot; Vente &amp; Achat</div>
+            <div class="agency-loc__detail">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>3 place Sadi Carnot<br>06270 Villeneuve-Loubet</span>
+            </div>
+            <div class="agency-loc__detail">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>Lun–Ven : 09h00 – 12h00 / 14h00 – 18h30<br>Samedi : 09h00 – 12h00</span>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="agency-loc">
+            <div class="agency-loc__number">02</div>
+            <h3>Agence du Loup</h3>
+            <div class="agency-loc__service">Transaction &amp; Gestion locative</div>
+            <div class="agency-loc__detail">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>27 avenue de la Mer<br>06270 Villeneuve-Loubet</span>
+            </div>
+            <div class="agency-loc__detail">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>Lun–Ven : 09h00 – 12h00 / 14h00 – 18h30<br>Samedi : 09h00 – 12h00</span>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="agency-loc">
+            <div class="agency-loc__number">03</div>
+            <h3>Agence Centrale</h3>
+            <div class="agency-loc__service">Transaction &middot; Cagnes-sur-Mer</div>
+            <div class="agency-loc__detail">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>5 boulevard du Maréchal Juin<br>06800 Cagnes-sur-Mer</span>
+            </div>
+            <div class="agency-loc__detail">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>Lun–Ven : 09h00 – 12h00 / 14h00 – 18h30<br>Samedi : 09h00 – 12h00</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section" aria-labelledby="cta-groupe">
+      <div class="container">
+        <div class="cta-banner">
+          <div class="cta-banner__decor" aria-hidden="true"></div>
+          <div class="cta-banner__content">
+            <div class="cta-banner__tag">Votre projet immobilier</div>
+            <h2 class="cta-banner__title" id="cta-groupe">Prêt à <em>nous rencontrer</em> ?</h2>
+          </div>
+          <div class="cta-banner__btns">
+            <a href="contact.html" class="btn btn--white">Nous contacter</a>
+            <a href="acheter.html" class="btn btn--ghost">Voir nos biens</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <div class="footer__brand-name">Le Carré d'Azur</div>
+          <div class="footer__brand-sub">GROUPE ORPI</div>
+          <p class="footer__brand-desc">Trois agences immobilières entre Cannes et Nice. Achat, vente, location et gestion locative sur la Côte d'Azur depuis plus de 30 ans.</p>
+          <div class="footer__socials">
+            <a href="#" class="footer__social" aria-label="Facebook">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="#" class="footer__social" aria-label="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="#" class="footer__social" aria-label="LinkedIn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer__cols">
+          <div class="footer__col">
+            <h4>ACHETER &amp; LOUER</h4>
+            <a href="acheter.html">Acheter un bien</a>
+            <a href="louer.html">Louer un bien</a>
+            <a href="estimer.html">Estimer mon bien</a>
+          </div>
+          <div class="footer__col">
+            <h4>NOS SERVICES</h4>
+            <a href="vendre.html">Vendre mon bien</a>
+            <a href="gestion-locative.html">Gestion locative</a>
+            <a href="le-groupe.html">Le groupe</a>
+          </div>
+          <div class="footer__col">
+            <h4>CONTACT</h4>
+            <a href="contact.html">Nous contacter</a>
+            <a href="tel:+33663277484">06 63 27 74 84</a>
+            <a href="https://www.orpi.com" target="_blank" rel="noopener noreferrer">orpi.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>&copy; 2026 Le Carré d'Azur — Groupe Orpi. Tous droits réservés.</span>
+        <div class="footer__legal">
+          <a href="mentions-legales.html">Mentions légales</a>
+          <a href="confidentialite.html">Politique de confidentialité</a>
+          <a href="cookies.html">Cookies</a>
+          <a href="#">Barème d'honoraires</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
