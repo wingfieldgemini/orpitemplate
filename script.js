@@ -183,7 +183,9 @@ if (track) {
 
     function scrollToCard(index) {
       currentIndex = Math.max(0, Math.min(index, cards.length - 1));
-      cards[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+      // Use scrollLeft instead of scrollIntoView to avoid vertical page scroll
+      const cardLeft = cards[currentIndex].offsetLeft - track.offsetLeft;
+      track.scrollTo({ left: cardLeft, behavior: 'smooth' });
       dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
     }
 
@@ -196,15 +198,27 @@ if (track) {
       resetAutoplay();
     });
 
-    // Auto-advance
+    // Auto-advance only when carousel is visible
+    let isVisible = false;
     function startAutoplay() {
+      clearInterval(autoplayInterval);
       autoplayInterval = setInterval(() => {
-        scrollToCard(currentIndex >= cards.length - 1 ? 0 : currentIndex + 1);
+        if (isVisible) {
+          scrollToCard(currentIndex >= cards.length - 1 ? 0 : currentIndex + 1);
+        }
       }, 5000);
     }
     function resetAutoplay() {
       clearInterval(autoplayInterval);
       startAutoplay();
+    }
+
+    // Only autoplay when the track is in viewport
+    if ('IntersectionObserver' in window) {
+      const visObs = new IntersectionObserver((entries) => {
+        isVisible = entries[0].isIntersecting;
+      }, { threshold: 0.3 });
+      visObs.observe(track);
     }
     startAutoplay();
 
