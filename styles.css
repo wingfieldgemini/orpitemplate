@@ -204,7 +204,11 @@ ul, ol { list-style: none; }
 .header__logo img {
   height: 45px; width: auto;
   /* Convert grey logo to brand red #E30513 */
-  filter: brightness(0) saturate(100%) invert(11%) sepia(95%) saturate(6000%) hue-rotate(355deg) brightness(95%) contrast(110%);
+  filter: brightness(0) saturate(100%) invert(13%) sepia(97%) saturate(7404%) hue-rotate(353deg) brightness(90%) contrast(102%);
+}
+.footer__logo img {
+  height: 35px; width: auto;
+  filter: brightness(0) invert(1);
 }
 .header__agency {
   font-size: 18px; font-weight: 500; color: var(--color-dark-grey);
@@ -255,9 +259,15 @@ ul, ol { list-style: none; }
 @media (min-width: 1024px) { .hamburger { display: none; } }
 
 .mobile-menu {
-  display: none; position: fixed; inset: 0; top: 64px;
-  background: var(--color-white); z-index: 99;
+  display: none; position: fixed; left: 0; right: 0; top: 64px; bottom: 0;
+  background: var(--color-white); z-index: 200;
   overflow-y: auto; padding: 8px 16px 32px;
+  border-top: 1px solid var(--color-light-brown);
+  animation: menuSlideIn 0.2s ease;
+}
+@keyframes menuSlideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 .mobile-menu.open { display: block; }
 @media (min-width: 1024px) { .mobile-menu { display: none !important; } }
