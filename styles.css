@@ -850,3 +850,110 @@ ul, ol { list-style: none; }
 .footer__bottom a { color: rgba(255,255,255,0.25); transition: color var(--transition); }
 .footer__bottom a:hover { color: rgba(255,255,255,0.5); }
 .footer__legal { display: flex; gap: 16px; flex-wrap: wrap; }
+
+/* ================================================================
+   FORM STATES
+   ================================================================ */
+.form-error {
+  border-color: var(--color-red) !important;
+  box-shadow: 0 0 0 3px var(--color-red-light) !important;
+  animation: shake 0.4s ease;
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-4px); }
+  40%, 80% { transform: translateX(4px); }
+}
+.form-success {
+  background: #e8f5e9; color: #2e7d32;
+  border-radius: var(--radius-md); padding: 16px 20px;
+  margin-top: 16px; font-size: 14px; line-height: 1.5;
+  animation: fadeInUp 0.3s ease;
+}
+.form-success strong { font-weight: 600; }
+
+/* ================================================================
+   CAROUSEL NAV
+   ================================================================ */
+.carousel-nav {
+  display: flex; align-items: center; justify-content: center;
+  gap: 16px; margin-top: 24px;
+}
+.carousel-btn {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid var(--color-light-brown);
+  background: var(--color-white); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all var(--transition);
+}
+.carousel-btn:hover {
+  background: var(--color-red); border-color: var(--color-red);
+  color: var(--color-white);
+}
+.carousel-btn:hover svg { stroke: var(--color-white); }
+.carousel-btn svg { width: 18px; height: 18px; color: var(--color-dark-grey); }
+.carousel-dots { display: flex; gap: 6px; }
+.carousel-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  border: none; background: var(--color-light-brown);
+  cursor: pointer; padding: 0;
+  transition: all var(--transition);
+}
+.carousel-dot.active { background: var(--color-red); width: 24px; border-radius: 4px; }
+
+/* ================================================================
+   SCROLL ANIMATIONS
+   ================================================================ */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.animate-on-scroll.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Stagger children in grids */
+.properties__grid .animate-on-scroll:nth-child(2) { transition-delay: 0.1s; }
+.properties__grid .animate-on-scroll:nth-child(3) { transition-delay: 0.2s; }
+.services-grid .animate-on-scroll:nth-child(2) { transition-delay: 0.1s; }
+.services-grid .animate-on-scroll:nth-child(3) { transition-delay: 0.2s; }
+.services-grid .animate-on-scroll:nth-child(4) { transition-delay: 0.3s; }
+.stats-bar__grid .animate-on-scroll:nth-child(2) { transition-delay: 0.1s; }
+.stats-bar__grid .animate-on-scroll:nth-child(3) { transition-delay: 0.2s; }
+.stats-bar__grid .animate-on-scroll:nth-child(4) { transition-delay: 0.3s; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================================================================
+   COOKIE CONSENT BANNER
+   ================================================================ */
+.cookie-banner {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  z-index: 9999; padding: 0 16px 16px;
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+}
+.cookie-banner.visible { transform: translateY(0); }
+.cookie-banner__inner {
+  max-width: 1280px; margin: 0 auto;
+  background: #2c2a35; color: rgba(255,255,255,0.8);
+  border-radius: var(--radius-lg); padding: 20px 24px;
+  display: flex; flex-direction: column; gap: 16px;
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.15);
+}
+@media (min-width: 768px) {
+  .cookie-banner__inner { flex-direction: row; align-items: center; gap: 24px; padding: 20px 32px; }
+}
+.cookie-banner__inner p { font-size: 13px; line-height: 1.6; flex: 1; margin: 0; }
+.cookie-banner__inner a { color: var(--color-pink); text-decoration: underline; }
+.cookie-banner__btns { display: flex; gap: 8px; flex-shrink: 0; }
+
+/* ================================================================
+   FAVORITE ACTIVE STATE
+   ================================================================ */
+.prop-card__fav.active { background: var(--color-white); }
+.prop-card__fav.active svg { color: var(--color-red); }
