@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gestion locative — Le Carré d'Azur | Groupe Orpi</title>
+  <title>Gestion locative &amp; Estimation — Le Carré d'Azur | Groupe Orpi</title>
   <meta name="description" content="Confiez la gestion locative de votre bien au Carré d'Azur, groupe Orpi. Recherche de locataires, encaissement des loyers, suivi comptable et fiscal sur la Côte d'Azur." />
   <meta property="og:title" content="Gestion locative — Le Carré d'Azur | Groupe Orpi" />
   <meta property="og:description" content="Confiez la gestion locative de votre bien au Carré d'Azur, groupe Orpi. Recherche de locataires, encaissement des loyers et suivi complet sur la Côte d'Azur." />
@@ -17,6 +17,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css?v=1774530596" />
+  <style>
+    .estimation-card { background: var(--color-white); border-radius: var(--radius-xl); box-shadow: var(--shadow-xl); padding: 32px 24px; max-width: 720px; margin: 0 auto; position: relative; z-index: 2; }
+    @media (min-width: 768px) { .estimation-card { padding: 48px; } }
+    .estimation-card h2 { margin-bottom: 8px; }
+    .estimation-card > p { color: var(--color-brown); margin-bottom: 32px; font-size: 15px; }
+    .page-subnav { display: flex; justify-content: center; gap: 12px; padding: 16px 0; background: var(--color-light-grey); border-bottom: 1px solid var(--color-light-brown); }
+    .page-subnav a { font-size: 13px; font-weight: 600; color: var(--color-brown); padding: 8px 20px; border-radius: var(--radius-pill); transition: all var(--transition); }
+    .page-subnav a:hover { color: var(--color-red); background: var(--color-red-light); }
+  </style>
   <link rel="icon" type="image/png" href="orpilogooo.png" />
   <script type="application/ld+json">
   {
@@ -116,9 +125,10 @@
             <span class="page-hero__dot" aria-hidden="true"></span>
             Tranquillité assurée
           </div>
-          <h1>Gestion locative <span>sur mesure</span></h1>
-          <p class="page-hero__desc">Confiez-nous la gestion de votre bien. Nous nous occupons de tout, vous profitez de vos revenus en toute sérénité.</p>
+          <h1>Gestion locative <span>&amp; Estimation</span></h1>
+          <p class="page-hero__desc">Confiez-nous la gestion de votre bien et obtenez une estimation gratuite. Nous vous accompagnons à chaque étape.</p>
           <div class="page-hero__btns">
+            <a href="#estimation" class="btn btn--ghost">Aller à l'estimation</a>
             <a href="contact.html" class="btn btn--primary">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
               Nous contacter
@@ -128,10 +138,16 @@
       </div>
     </section>
 
+    <!-- Sub-navigation -->
+    <nav class="page-subnav" aria-label="Navigation de la page">
+      <a href="#gestion">Gestion locative</a>
+      <a href="#estimation">Estimer mon bien</a>
+    </nav>
+
     <!-- ============================================================
          CONTENT — Pourquoi nous confier votre bien
          ============================================================ -->
-    <section class="section" aria-labelledby="confier-title">
+    <section class="section" id="gestion" aria-labelledby="confier-title">
       <div class="container">
         <div class="content-grid">
           <div class="content-img">
@@ -193,6 +209,121 @@
     </section>
 
     <!-- ============================================================
+         ESTIMATION SECTION
+         ============================================================ -->
+    <section class="section" id="estimation" aria-labelledby="estimation-title">
+      <div class="container">
+        <div class="section__header">
+          <div class="section__tag">Estimation gratuite</div>
+          <h2 class="section__title" id="estimation-title">Faites estimer <em>votre bien</em></h2>
+          <p class="section__desc">Obtenez une estimation précise et gratuite de votre bien immobilier grâce à nos experts du marché local.</p>
+        </div>
+        <div class="estimation-card">
+          <h2>Demander une estimation gratuite</h2>
+          <p>Remplissez le formulaire ci-dessous et un expert vous recontactera sous 24h.</p>
+          <form data-form action="#" method="post">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="est-prenom">Prénom</label>
+                <input type="text" id="est-prenom" name="prenom" class="form-input" placeholder="Votre prénom" required />
+              </div>
+              <div class="form-group">
+                <label for="est-nom">Nom</label>
+                <input type="text" id="est-nom" name="nom" class="form-input" placeholder="Votre nom" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="est-email">Email</label>
+                <input type="email" id="est-email" name="email" class="form-input" placeholder="votre@email.fr" />
+              </div>
+              <div class="form-group">
+                <label for="est-telephone">Téléphone</label>
+                <input type="tel" id="est-telephone" name="telephone" class="form-input" placeholder="06 00 00 00 00" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="est-type">Type de bien</label>
+                <select id="est-type" name="type-bien" class="form-select">
+                  <option value="">Sélectionner</option>
+                  <option value="appartement">Appartement</option>
+                  <option value="maison">Maison</option>
+                  <option value="villa">Villa</option>
+                  <option value="terrain">Terrain</option>
+                  <option value="autre">Autre</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="est-ville">Ville</label>
+                <select id="est-ville" name="ville" class="form-select">
+                  <option value="">Sélectionner</option>
+                  <option value="villeneuve-loubet">Villeneuve-Loubet</option>
+                  <option value="cagnes-sur-mer">Cagnes-sur-Mer</option>
+                  <option value="saint-paul-de-vence">Saint-Paul-de-Vence</option>
+                  <option value="la-colle-sur-loup">La Colle-sur-Loup</option>
+                  <option value="nice">Nice</option>
+                  <option value="cannes">Cannes</option>
+                  <option value="autre">Autre</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="est-surface">Surface approximative</label>
+                <input type="text" id="est-surface" name="surface" class="form-input" placeholder="Ex : 80 m²" />
+              </div>
+              <div class="form-group">
+                <label for="est-pieces">Nombre de pièces</label>
+                <select id="est-pieces" name="pieces" class="form-select">
+                  <option value="">Sélectionner</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6+">6+</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="est-message">Informations complémentaires</label>
+              <textarea id="est-message" name="message" class="form-textarea" rows="4" placeholder="Décrivez votre bien ou posez-nous vos questions..."></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary btn--lg btn--full">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              Demander mon estimation gratuite
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         METHODOLOGY
+         ============================================================ -->
+    <section class="section section--grey" aria-labelledby="methodo-title">
+      <div class="container">
+        <div class="content-grid">
+          <div class="content-block">
+            <h2 id="methodo-title">Une estimation <em>fiable</em> et personnalisée</h2>
+            <p>Notre méthodologie d'estimation repose sur une analyse rigoureuse du marché local et une visite approfondie de votre bien. Chaque estimation est réalisée par un expert connaissant parfaitement le secteur.</p>
+            <ul>
+              <li>Analyse comparative du marché local</li>
+              <li>Visite approfondie de votre bien</li>
+              <li>Prise en compte de tous les critères</li>
+              <li>Rapport d'estimation détaillé et argumenté</li>
+            </ul>
+            <a href="contact.html" class="btn btn--primary">Nous contacter</a>
+          </div>
+          <div class="content-img">
+            <img src="https://images.unsplash.com/photo-1560520031-3a4dc4e9de0c?w=800&h=600&fit=crop" alt="Agent immobilier présentant une estimation de bien sur la Côte d'Azur" width="800" height="600" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
          CTA BANNER
          ============================================================ -->
     <section class="section" aria-labelledby="cta-title">
@@ -200,11 +331,11 @@
         <div class="cta-banner">
           <div class="cta-banner__decor" aria-hidden="true"></div>
           <div class="cta-banner__content">
-            <div class="cta-banner__tag">PROPRIÉTAIRE</div>
-            <h2 class="cta-banner__title" id="cta-title">Propriétaire ? Estimez le loyer de <em>votre bien</em></h2>
+            <div class="cta-banner__tag">Votre projet</div>
+            <h2 class="cta-banner__title" id="cta-title">Prêt à <em>nous confier</em> votre bien ?</h2>
           </div>
           <div class="cta-banner__btns">
-            <a href="estimer.html" class="btn btn--white">
+            <a href="#estimation" class="btn btn--white">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
               Estimer en ligne
             </a>
