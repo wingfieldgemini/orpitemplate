@@ -38,8 +38,7 @@ if (header) {
   const page = window.location.pathname.split('/').pop() || 'index.html';
   const tabTargets = {
     acheter: 'acheter.html',
-    louer: 'louer.html',
-    estimer: 'estimer.html'
+    louer: 'louer.html'
   };
 
   // Track active mode
@@ -49,10 +48,9 @@ if (header) {
   // Dynamic fields config: which data-field to show per tab
   const fieldConfig = {
     acheter: ['budget'],
-    louer:   ['loyer'],
-    estimer: ['surface']
+    louer:   ['loyer']
   };
-  const allDynamicFields = ['budget', 'loyer', 'surface'];
+  const allDynamicFields = ['budget', 'loyer'];
 
   function showFieldsForMode(mode) {
     const visible = fieldConfig[mode] || ['budget'];
