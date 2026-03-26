@@ -173,69 +173,92 @@ if (track) {
       const dot = document.createElement('button');
       dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
       dot.setAttribute('aria-label', `Avis ${i + 1}`);
-      dot.addEventListener('click', () => scrollToCard(i));
+      dot.addEventListener('click', () => { goToCard(i); resetAutoplay(); });
       dotsContainer.appendChild(dot);
     });
 
     const dots = dotsContainer.querySelectorAll('.carousel-dot');
     let currentIndex = 0;
-    let autoplayInterval;
+    let autoplayTimer = null;
+    let isVisible = false;
 
-    function scrollToCard(index) {
+    // Scroll the track horizontally using scrollLeft — never touches page scroll
+    function goToCard(index) {
       currentIndex = Math.max(0, Math.min(index, cards.length - 1));
-      // Use scrollLeft instead of scrollIntoView to avoid vertical page scroll
-      const cardLeft = cards[currentIndex].offsetLeft - track.offsetLeft;
-      track.scrollTo({ left: cardLeft, behavior: 'smooth' });
+      const gap = 16; // matches CSS gap
+      const cardWidth = cards[0].offsetWidth + gap;
+      const targetScroll = currentIndex * cardWidth;
+
+      // Manually animate scrollLeft to avoid any browser smooth-scroll side effects
+      const start = track.scrollLeft;
+      const distance = targetScroll - start;
+      const duration = 350;
+      let startTime = null;
+
+      function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        // ease-out quad
+        const ease = 1 - (1 - progress) * (1 - progress);
+        track.scrollLeft = start + distance * ease;
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+
       dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
     }
 
     nav.querySelector('.carousel-btn--prev').addEventListener('click', () => {
-      scrollToCard(currentIndex - 1);
+      goToCard(currentIndex - 1);
       resetAutoplay();
     });
     nav.querySelector('.carousel-btn--next').addEventListener('click', () => {
-      scrollToCard(currentIndex + 1);
+      goToCard(currentIndex + 1);
       resetAutoplay();
     });
 
-    // Auto-advance only when carousel is visible
-    let isVisible = false;
+    // Autoplay — only when visible
     function startAutoplay() {
-      clearInterval(autoplayInterval);
-      autoplayInterval = setInterval(() => {
+      stopAutoplay();
+      autoplayTimer = setInterval(() => {
         if (isVisible) {
-          scrollToCard(currentIndex >= cards.length - 1 ? 0 : currentIndex + 1);
+          goToCard(currentIndex >= cards.length - 1 ? 0 : currentIndex + 1);
         }
       }, 5000);
     }
+    function stopAutoplay() {
+      if (autoplayTimer) { clearInterval(autoplayTimer); autoplayTimer = null; }
+    }
     function resetAutoplay() {
-      clearInterval(autoplayInterval);
+      stopAutoplay();
       startAutoplay();
     }
 
-    // Only autoplay when the track is in viewport
     if ('IntersectionObserver' in window) {
-      const visObs = new IntersectionObserver((entries) => {
+      new IntersectionObserver((entries) => {
         isVisible = entries[0].isIntersecting;
-      }, { threshold: 0.3 });
-      visObs.observe(track);
+        if (isVisible && !autoplayTimer) startAutoplay();
+        if (!isVisible) stopAutoplay();
+      }, { threshold: 0.2 }).observe(track);
+    } else {
+      isVisible = true;
+      startAutoplay();
     }
-    startAutoplay();
 
-    // Update dots on manual scroll
+    // Sync dots on manual swipe/scroll
     let scrollTimeout;
     track.addEventListener('scroll', () => {
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
-        const trackRect = track.getBoundingClientRect();
-        cards.forEach((card, i) => {
-          const rect = card.getBoundingClientRect();
-          if (rect.left >= trackRect.left - 10 && rect.left <= trackRect.left + 50) {
-            currentIndex = i;
-            dots.forEach((d, j) => d.classList.toggle('active', j === i));
-          }
-        });
-      }, 100);
+        const gap = 16;
+        const cardWidth = cards[0].offsetWidth + gap;
+        const newIndex = Math.round(track.scrollLeft / cardWidth);
+        if (newIndex !== currentIndex && newIndex >= 0 && newIndex < cards.length) {
+          currentIndex = newIndex;
+          dots.forEach((d, j) => d.classList.toggle('active', j === currentIndex));
+        }
+      }, 80);
     }, { passive: true });
   }
 }
