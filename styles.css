@@ -184,8 +184,11 @@ ul, ol { list-style: none; }
   text-decoration: none; flex-shrink: 0;
 }
 .header__logo { display: flex; align-items: center; flex-shrink: 0; }
-.header__logo svg { height: 32px; width: auto; display: block; flex-shrink: 0; }
-@media (min-width: 1024px) { .header__logo svg { height: 36px; } }
+.header__logo img {
+  height: 36px; width: auto; display: block; flex-shrink: 0;
+  mix-blend-mode: multiply; /* makes black bg transparent on white header */
+}
+@media (min-width: 1024px) { .header__logo img { height: 40px; } }
 .header__brand-divider {
   width: 1px; height: 28px;
   background: var(--color-light-brown);
